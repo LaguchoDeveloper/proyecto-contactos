@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gestor de Contactos</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    .formulario {
+      display: flex;
+      flex-direction: column;
+      max-width: 400px;
+      margin: 0 auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    input {
+      margin-bottom: 10px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      background: #007bff;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #0056b3;
+    }
+
+    .contacto {
+      background: white;
+      margin: 10px auto;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+      width: 400px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .contacto img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+
+    .contacto-info {
+      display: flex;
+      align-items: center;
+    }
+
+    .eliminar {
+      background: red;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+
+    .eliminar:hover {
+      background: darkred;
+    }
+  </style>
+</head>
+<body>
+  <h1>📇 Gestor de Contactos</h1>
+
+  <div class="formulario">
+    <input type="text" id="nombre" placeholder="Nombre" />
+    <input type="text" id="telefono" placeholder="Teléfono" />
+    <input type="email" id="correo" placeholder="Correo" />
+    <input type="file" id="foto" accept="image/*" />
+    <button id="agregarBtn">Agregar contacto</button>
+  </div>
+
+  <div id="listaContactos"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
