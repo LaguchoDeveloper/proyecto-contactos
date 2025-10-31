@@ -89,15 +89,32 @@
   <h1>📇 Gestor de Contactos</h1>
 
   <div class="formulario">
-    <input type="text" id="nombre" placeholder="Nombre" />
-    <input type="text" id="telefono" placeholder="Teléfono" />
-    <input type="email" id="correo" placeholder="Correo" />
-    <input type="file" id="foto" accept="image/*" />
-    <button id="agregarBtn">Agregar contacto</button>
-  </div>
+  <input type="text" id="nombre" placeholder="Nombre" required />
+  <input type="text" id="telefono" placeholder="Teléfono" required maxlength="9" />
+  <input type="email" id="correo" placeholder="Correo" required />
+  <input type="file" id="foto" accept="image/*" />
+  <button id="agregarBtn">Agregar contacto</button>
+</div>
 
-  <div id="listaContactos"></div>
+<div id="listaContactos"></div>
 
-  <script src="app.js"></script>
+<script>
+  const telefono = document.getElementById('telefono');
+  const correo = document.getElementById('correo');
+  const boton = document.getElementById('agregarBtn');
+
+  telefono.addEventListener('input', () => {
+    telefono.value = telefono.value.replace(/[^0-9]/g, '');
+  });
+
+  boton.addEventListener('click', (e) => {
+    const emailValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailValido.test(correo.value)) {
+      e.preventDefault();
+      alert('Por favor ingresa un correo válido.');
+      return;
+    }
+  });
+</script>
 </body>
 </html>
