@@ -99,22 +99,55 @@
 <div id="listaContactos"></div>
 
 <script>
-  const telefono = document.getElementById('telefono');
-  const correo = document.getElementById('correo');
+  const nombre = document.getElementById("nombre");
+  const telefono = document.getElementById("telefono");
+  const correo = document.getElementById("correo");
+  const foto = document.getElementById("foto");
+  const agregarBtn = document.getElementById("agregarBtn");
+  const listaContactos = document.getElementById("listaContactos");
 
-  telefono.addEventListener('input', () => {
-    telefono.value = telefono.value.replace(/[^0-9]/g, '');
+  telefono.addEventListener("input", () => {
+    telefono.value = telefono.value.replace(/[^0-9]/g, "");
   });
 
-  correo.addEventListener('input', () => {
+  agregarBtn.addEventListener("click", async () => {
     const emailValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (nombre.value.trim() === "" || telefono.value.trim() === "" || correo.value.trim() === "") {
+      alert("Por favor completa todos los campos.");
+      return;
+    }
+
     if (!emailValido.test(correo.value)) {
-      correo.style.border = "2px solid red";
-    } else {
-      correo.style.border = "";
+      alert("Por favor ingresa un correo válido.");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("nombre", nombre.value);
+    formData.append("telefono", telefono.value);
+    formData.append("correo", correo.value);
+    formData.append("foto", foto.files[0]);
+
+    try {
+      const res = await fetch("http://localhost:3000/contactos", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!res.ok) throw new Error("Error al guardar contacto");
+      alert("✅ Contacto agregado correctamente");
+      nombre.value = "";
+      telefono.value = "";
+      correo.value = "";
+      foto.value = "";
+
+    } catch (err) {
+      console.error(err);
+      alert("❌ No se pudo agregar el contacto.");
     }
   });
 </script>
+
 
 </body>
 </html>
